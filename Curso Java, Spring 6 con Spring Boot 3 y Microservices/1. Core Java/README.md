@@ -92,6 +92,316 @@ Adicinalmente se agrega un gráfico de cómo es que funciona todo esto intername
 
 ![Grafico_1](/images/Grafico_1.PNG)
 
+## Variables
+
+Es donde se pueden guardar datos y existen diferentes tipos.
+
+### Data types
+
+* Integer 
+* Float
+* Character
+* Boolean
+
+#### Integer
+
+Son números enteros (ej. `int num = 3;`)
+
+- byte ->  1 bytes
+- short -> 2 bytes
+- int -> 4 bytes
+- long -> 8 bytes
+
+#### Float
+
+Son numeros con decimales (ej. `float num = 2.6f;`)
+
+- float -> 4 bytes
+- double -> 8 bytes (más precisión)
+
+#### Character
+
+Son letras (ej. `char letter = 'k';`)
+
+- char -> 2 bytes
+
+#### Boolean
+
+Pueden ser *true* o *false* (ej. `boolean b = true;`)
+
+Para probar esto se modifica el código de *Hello.java*
+
+```java
+class Hello 
+{
+    public static void main(String a[]) 
+    {
+        int num1 = 3; // Se crean las variables enteras
+        int num2 = 6;
+        int result = num1 + num2; // El resultado de la suma se guarda en una variable del mismo tipo
+
+        System.out.println(result); 
+    }
+}
+```
+
+Se compila para actualizar el archivo *Hello.class* y se muestra el resultado.
+
+```cmd
+>javac Hello.java
+>java Hello
+9
+```
+El siguiente código contiene todas las variables antes mencionadas y se intentará compilar para ver si la sintaxis usada es correcta.
+
+```java
+class Hello 
+{
+    public static void main(String a[]) 
+    {
+        byte by = 127; // Se crean todas las variables
+        short s = 555;
+        int num = 12;
+        long l = 1138l;
+
+        float f = 5.7f;
+        double d = 5.75;
+
+        char c = 's';
+
+        boolean b = false;
+
+        System.out.println(by); // Se muestran las variables
+        System.out.println(s);
+        System.out.println(num);
+        System.out.println(l);
+        System.out.println(f);
+        System.out.println(d);
+        System.out.println(c);
+        System.out.println(b);
+    }
+}
+```
+
+Se compila y ejecuta el programa
+
+```cmd
+>javac Hello.java
+>java Hello
+127
+555
+12
+1138
+5.7
+5.75
+s
+false
+```
+## Literals
+
+Algunas formas de escribir variables en diferentes sistemas:
+
+* Hexadecimal: `int h = 0x7E;` 
+* Binario: `int b = 0b101;`
+
+Para potencias de 10:
+
+* Se puede separar con "_" para una mejor lectura de los ceros (ej. `long l = 100_000_000;`)
+* También se pueden representar en formato científico (ej. `double d = 12e-10;`)
+
+Las letras se pueden tratar como numeros tal que al hacer operaciones avanzaran o retrocederan según su orden en el alfabeto.
+
+```java
+class Hello 
+{
+    public static void main(String args[]) 
+    {
+        char c = 'd';
+        c++;
+        
+        System.out.println(c);
+      }
+}
+```
+```cmd
+>java Hello.java
+e
+```
+
+## Type Convertion
+
+Para probar conversiones de tipo de variable se uso el siguiente código:
+
+```java
+class Hello 
+{
+    public static void main(String args[]) 
+    {
+        //byte b = 127;
+        int a = 257;
+        byte b = (byte) a;
+
+        System.out.println(b);
+
+        float f = 5.6f;
+        int i = (int) f;
+
+        System.out.println(i);
+
+      }
+}
+```
+Se puede hacer una conversión directa si el valor inicial tiene menor rango que el valor final, para el caso inverso se requiere agregar entre parentesis el tipo de variable al que se quiere convertir (ej. `byte b = (byte) a;`), si el valor inocial excede el máximo valor posible en el tipo de variable convertida el valor guardado será el resto. En el caso de convertir un *float* a *integer* se perderá la parte decimal.
+
+## Operators
+
+### Arithmetic
+
+|Operador|Símbolo|
+|--------|-------|
+|Suma    | `+`   |
+|Resta   | `-`   |
+|Multiplicacion   | `*`|
+|División    | `/`|
+|Resto   | `%`  |
+
+### Comparator
+
+|Operador|Símbolo|
+|--------|-------|
+|Mayor   |`>`    |
+|Menor   |`<`    |
+|Mayor igual |`<=`|
+|Menor igual |`>=`|
+|Igual  |`==`|
+|DIferente  |`!=`|
+
+
+### Conditional
+
+|Operador|Símbolo|
+|--------|-------|
+|And     | `&&`  |
+|Or      | `\|\|`|
+|Not     | `!`   |
+
+Se hacen las pruebas con el siguiente *script*
+
+```java
+class Hello 
+{
+    public static void main(String args[]) 
+    {
+        int a = 20;
+        int b = 12;
+
+        System.out.println(a + b);
+        System.out.println(a - b);
+        System.out.println(a * b);
+        System.out.println(a / b);
+        System.out.println(a % b);
+
+        boolean result = a > b;
+        System.out.println(result);
+        result = a <= b;
+        System.out.println(result);
+        result = a != b;
+        System.out.println(result);
+
+        result = a <= b && a == b;
+        System.out.println(result);
+      }
+}
+```
+```cmd
+>java Hello.java
+32
+8    
+240  
+1    
+8    
+true 
+false
+true 
+false
+```
+Los resultados son correctos
+
+## If, Else If | Ternary Operator |  Switch Statement
+
+Se usa *If* para determinar si una afirmacion (*Comparator Operator*) es verdadera o falsa, *Else if* sirve para repetir la acción de un *If* anterior, pero con una condición diferente.
+
+*Switch* se usa para comparar valores y asignar una acción para cada valor de la variable.
+
+El *Ternary Operator* realiza la misma acción que un *If, Else If*, pero es más conciso.
+
+Luego se usa el siguiente código para las pruebas:
+
+```java
+class Hello 
+{
+    public static void main(String args[]) 
+    {
+        int a = 12;
+        int b = 7;
+        char c = '0';
+
+
+        // Prueba para If, Else If
+
+        if (a < b)
+        {
+            c = 'm';
+        }
+        else if (a > b)
+        {
+            c = 'M';
+        }
+
+        System.out.println(c);
+
+
+        // Prueba para Switch Statement
+
+        switch(c)
+        {
+            case 'm':
+                System.out.println("a es menor que b");
+                break;
+            case 'M':
+                System.out.println("a es mayor que b");
+                break;
+            default:
+                System.out.println("a es igual que b");        
+        }
+
+        // Prueba para Ternary Operator
+
+        int numero = 6;
+        char par_o_impar = numero % 2 == 0 ? 'p':'i' ;
+
+        System.out.println(par_o_impar);
+
+    }
+}
+```
+```cmd
+>java Hello.java
+M
+a es mayor que b
+p
+```
+
+
+
+
+
+
+
+
+
+
+
 
 
 

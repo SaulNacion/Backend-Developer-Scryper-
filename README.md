@@ -5,23 +5,23 @@
 1. [x] JDK setup
 1. [x] First code in Java
 1. [x] How Java Works
-1. [ ] Variables
-1. [ ] Data Types
-1. [ ] Literal
-1. [ ] Type Conversion
-1. [ ] Assignment Operators
-1. [ ] Relational Operators
-1. [ ] Logical Operators
-1. [ ] If Else If
-1. [ ] Ternary
-1. [ ] Switch Statements
-1. [ ] Need For Loop
-1. [ ] While Loop
-1. [ ] Do While Loop
-1. [ ] For Loop
-1. [ ] Wich Loop
-1. [ ] Class and Object Theory
-1. [ ] Class and Object Practical
+1. [x] Variables
+1. [x] Data Types
+1. [x] Literal
+1. [x] Type Conversion
+1. [x] Assignment Operators
+1. [x] Relational Operators
+1. [x] Logical Operators
+1. [x] If Else If
+1. [x] Ternary
+1. [x] Switch Statements
+1. [x] Need For Loop
+1. [x] While Loop
+1. [x] Do While Loop
+1. [x] For Loop
+1. [x] Wich Loop To Use
+1. [x] Class and Object Theory
+1. [x] Class and Object Practical
 1. [ ] JDK JRE JVM
 1. [ ] Methods
 1. [ ] Method Overloading
