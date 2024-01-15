@@ -4,7 +4,7 @@
 1. [x] Introduction of Java
 1. [x] JDK setup
 1. [x] First code in Java
-1. [ ] How Java Works
+1. [x] How Java Works
 1. [ ] Variables
 1. [ ] Data Types
 1. [ ] Literal

@@ -66,6 +66,43 @@ System.out.println("Hello World");
 
 Esto indica que aún faltan cosas para que funcione el código que se agregarán más adelante.
 
+## How Java works
+
+Para resolver el problema del anterior video se hacen las siguientes cambios en el código de *Hello.java*:
+
+```java
+class Hello //Se crea la clase Hello
+{
+    public static void main(String a[]) // Este es su objeto
+    {
+        System.out.println("Hello World");
+    }
+}
+
+```
+
+Al compilar ese código usando el terminal se obtiene un nuevo archivo llamado *Hello.class* que es el *byte code* y luego se ejecuta para al fin lograr que el programa escriba "*Hello word*".
+
+```cmd
+>javac Hello.java
+>java Hello
+Hello World
+```
+Adicinalmente se agrega un gráfico de cómo es que funciona todo esto internamente.
+
+![Grafico_1](/images/Grafico_1.PNG)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
