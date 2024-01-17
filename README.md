@@ -22,20 +22,20 @@
 1. [x] Wich Loop To Use
 1. [x] Class and Object Theory
 1. [x] Class and Object Practical
-1. [ ] JDK JRE JVM
-1. [ ] Methods
-1. [ ] Method Overloading
-1. [ ] Stack and Heap
-1. [ ] Need of Array
-1. [ ] Creation of Array
-1. [ ] Multidimensional Array
-1. [ ] jagged and 3D Array
-1. [ ] Drawbacks of Array
-1. [ ] Array of Objects
-1. [ ] Enhanced for loop
-1. [ ] What is String
-1. [ ] Mutable vs Inmutable string
-1. [ ] StringBuffer and StringBuilder
+1. [x] JDK JRE JVM
+1. [x] Methods
+1. [x] Method Overloading
+1. [x] Stack and Heap
+1. [x] Need of Array
+1. [x] Creation of Array
+1. [x] Multidimensional Array
+1. [x] jagged and 3D Array
+1. [x] Drawbacks of Array
+1. [x] Array of Objects
+1. [x] Enhanced for loop
+1. [x] What is String
+1. [x] Mutable vs Inmutable string
+1. [x] StringBuffer and StringBuilder
 1. [ ] Static Variable
 1. [ ] Static block
 1. [ ] Static Method

@@ -1,3 +1,4 @@
+# Core Java
 ## First code in Java
 
 Para experimentar con código se usa jshell en el terminal
@@ -390,6 +391,424 @@ class Hello
 M
 a es mayor que b
 p
+```
+
+## While | Do While |  For
+
+*While* se usa para hacer repeticiones a partir de una condición la cual se escribirá dentro del parentesis al lado de este y la acción a repetir dentro de las llave que lo acompañan (ej. `while(true){System.out.println(i);}`). 
+
+*Do while* se usa para hacer al menos una vez la acción dentro de las llaves a pesar que la condición sea falsa, su sintaxis en la parte de *while* es la misma (ej. `do{System.out.println(i);}while(false);`). 
+
+*For* engloba tanto la declaración de la variable a iterar, la condición y su incremento o decremento. Al igual que los anteriores tambien repite la acción dentro de las llaves (ej. `for(int i=1; i<10; i++){System.out.println(i);}`).
+
+A continuación el código de prueba para probar los *loops*.
+
+```java
+public class Hello 
+{
+    public static void main(String args[]) 
+    {
+        int i = 1;
+
+        while(i <= 10)
+        {
+            System.out.println(i);
+            i++;
+        }
+
+        int j = 1;
+
+        do
+        {
+            System.out.println(j);
+            j++;
+        }while(j <= 10);
+
+        for(int k = 1; k <=10; k++)
+        {
+            System.out.println(k);
+        }
+
+    }
+}
+```
+
+Se muestran diferentes maneras usando todos los *loops* de contar de 1 al 10.
+```cmd
+>java Hello.java
+1
+2 
+3 
+4 
+5 
+6 
+7 
+8 
+9 
+10
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+```
+## Object Oriented Programming
+
+Se muestra el código usado para probar los conceptos de la clase, en este *script* se creo la clase *Calculator* y se agregaron los métodos *add* y *res* luego se crea un objeto *calc* en la función principal de la clase *Hello* para poder usar los métodos de *Calculator*.
+
+```java
+class Calculator // Clase
+{
+    public int add(int n1, int n2) // Funciones de la clase (Métodos)
+    {
+        int s = n1 + n2;
+        return s;
+    }
+
+    public int res(int n1, int n2) // Parámetros de la clase (Métodos)
+    {
+        int r = n1 - n2;
+        return r;
+    }
+}
+
+public class Hello 
+{
+    public static void main(String args[]) 
+    {
+        int a = 18;
+        int b = 12;
+        Calculator calc = new Calculator();  //Creación del objeto a partir de la clase
+
+        int suma = calc.add(a,b); // Uso del objeto para hacer funciones heredadas de la clase
+        int resta = calc.res(a,b);
+
+        System.out.println(suma);
+        System.out.println(resta);
+        
+    }
+}
+```
+Se compilar el archivo *.java* para crea el archivo byte de *Calculator*
+
+```cmd
+>javac Hello.java
+```
+
+Y luego se ejecuta la clase *Hello* para ver los resultados de las operaciones
+
+```cmd
+>java Hello
+30
+6
+```
+## Methods | Method Overloading
+
+En este código se puede ver que se pueden crear diferentes tipos de métodos y agregarles funcionalidad de acuerdo al tipo que sean
+
+```java
+class Computer 
+{
+    public void playMusic() // Tipo "void" no devuelve valores solo hace acciones
+    {
+        System.out.println("Playing Music...");
+    }
+
+    public String buyPen(int cost) // Tipo "String" devuelve un valor del mismo tipo
+    {
+        if (cost < 10)
+            return "Nothing";
+        return "Pen";
+    }
+}
+
+public class Hello 
+{
+    public static void main(String args[]) 
+    {
+        int cost = 10;
+        Computer com = new Computer();  
+
+        com.playMusic();
+        String answer = com.buyPen(cost);
+        System.out.println(answer);
+    }
+}
+```
+Y este es el resultado
+```cmd
+>javac Hello.java
+>java Hello
+Playing Music...
+Pen
+```
+
+El siguiente código se usa para probar el *Method Overloading* es una propiedad en Java que permite usar el mismo método de diferentes formas variando su tipo y el tipo de variables de sus parámetros
+```java
+class Calculator 
+{
+    public int add(int n1, int n2) 
+    {
+        return n1 + n2;
+    }
+    public int add(int n1, int n2, int n3) 
+    {
+        return n1 + n2 + n3;
+    }
+    public double add(double n1, int n2) 
+    {
+        return n1 + n2;
+    }
+
+}
+
+public class Hello 
+{
+    public static void main(String args[]) 
+    {
+        int num1_i = 2;
+        double num1_d = 2.65;
+        int num2 = 3;
+        int num3 = 5;
+        Calculator calc = new Calculator();
+
+        System.out.println(calc.add(num1_i,num2));
+        System.out.println(calc.add(num1_i,num2,num3));
+        System.out.println(calc.add(num1_d,num2));
+    }
+}
+```
+Se comprueba el resultado en el siguiente *script*
+```cmd
+>javac Hello.java
+>java Hello
+5
+10  
+5.65
+```
+## Arrays | Multidimentional Arrays | Array of Objects
+
+Los *arrays* son un conjunto de variables pueden o no ser del mismo tipo, estas pueden estar distribuidas de las siguientes maneras:
+
+* *Array* :  Una sola fila
+    * *Array of Objects*
+* *Multidimentional Array* :  Más de una fila
+    * *Bidimentional Array*
+    * *Jagged*
+    * *Tridimentional Array*
+
+A continuación se muestra el código para probar lo visto en los videos relacionados. 
+
+```java
+class Students
+{
+    String name;
+    int age;
+    float note;
+}
+
+public class Hello 
+{
+    public static void main(String args[]) 
+    {
+        // Arrays
+
+        int num[] = {2,3,4}; // Declaración de "Arrays"
+        char let[] = {'k','l','m'};
+
+        int num1[] = new int[4]; // Declaración de "Arrays vacios"
+        
+        for (int i = 0; i <= 2; i++)
+        {
+            System.out.print(num[i] + " ");
+        }
+        System.out.println();
+        for (int i = 0; i <= 2; i++)
+        {
+            System.out.print(let[i] + " ");
+        }
+        System.out.println();
+        for (int i = 0; i <= 3; i++)
+        {
+            num1[i] = (int)(Math.random() * 10); // Uso de "Math.random() para agregar valores aleatorios"
+            System.out.print(num1[i] + " ");
+        }
+        System.out.println();
+
+        // Multidimentional Array
+
+        //2D
+
+        int dd_num[][] = new int[3][3];
+
+        for (int i = 0; i <= 2; i++)
+        {
+            for (int j = 0; j <= 2; j++)
+            {
+                dd_num[i][j] = (int)(Math.random() * 10);
+            }
+        }
+
+        for (int n[]: dd_num)
+        {
+            for (int m: n)
+            {
+                System.out.print(" " + m);
+            }
+            System.out.println();
+        }
+
+        // jagged
+
+        int j_num[][] = new int[3][];
+
+        j_num[0] = new int[2];
+        j_num[1] = new int[4];
+        j_num[2] = new int[3];
+
+
+        for (int i = 0; i < j_num.length; i++)
+        {
+            for (int j = 0; j < j_num[i].length; j++)
+            {
+                j_num[i][j] = (int)(Math.random() * 10);
+            }
+        }
+
+        for (int n[]: j_num)
+        {
+            for (int m: n)
+            {
+                System.out.print(" " + m);
+            }
+            System.out.println();
+        }
+
+        //  3D
+
+        int ddd_num[][][] = new int[3][3][4];
+
+        for (int i = 0; i < ddd_num.length; i++)
+        {
+            for (int j = 0; j < ddd_num[i].length; j++)
+            {
+                for (int k = 0; k < ddd_num[i][j].length; k++)
+                {
+                    ddd_num[i][j][k] = (int)(Math.random() * 10);
+                }
+            }
+        }
+
+        // Array of Objects
+
+        Students s1 = new Students();
+        s1.age = 15;
+        s1.name = "Jorge";
+        s1.note = 18.5f;
+
+        Students s2 = new Students();
+        s2.age = 17;
+        s2.name = "Carlos";
+        s2.note = 8.9f;
+
+        Students s3 = new Students();
+        s3.age = 23;
+        s3.name = "Andre";
+        s3.note = 16.5f;
+
+        Students students[] = new Students[3];
+
+        students[0] = s1;
+        students[1] = s2;
+        students[2] = s3;
+
+        for (int i = 0; i < students.length; i++)
+        {
+            System.out.println(students[i].age + " " + students[i].name + " " + students[i].note);
+        }
+    }
+}
+```
+
+Se muestran los resultados comprobados
+
+```cmd
+>javac Hello.java
+>java Hello       
+2 3 4   
+k l m   
+3 3 7 1 
+ 3 8 4  
+ 9 3 3  
+ 4 3 2  
+ 8 2    
+ 5 2 9 9
+ 4 1 5
+15 Jorge 18.5
+17 Carlos 8.9
+23 Andre 16.5
+```
+## What is String | String Buffer and String Builder
+
+```java
+public class Hello 
+{
+    public static void main(String args[]) 
+    {
+        // "String" es una clase y se puede declarar de ambas maneras
+        String str = "Hola ";
+        String str1 = new String("Saul");
+
+        System.out.println(str.getClass());
+        System.out.println(str1.getClass());
+
+        System.out.println(str + str1);
+
+        // Cuando se declara una nueva con los mismos caracteres no se crea una nueva
+        // variable solo se le asigna la misma direccion que la variable ya creada
+        String str2 = "Saul";
+        String str3 = "Saul";
+ 
+        System.out.println(str2 == str3);
+
+        // "String" naturalmente es inmutable, pero existe un String que sí lo es
+        // "StringBuffer" es mutable.
+        StringBuffer name = new StringBuffer("Saul");
+        System.out.println(name.charAt(3));
+
+        name.append(" Nacion");
+        System.out.println(name);
+
+        name.insert(4, " Junior");
+        System.out.println(name);
+    }
+}
+```
+
+```cmd
+>java Hello.java
+class java.lang.String
+class java.lang.String
+Hola Saul
+true
+l
+Saul Nacion
+Saul Junior Nacion
 ```
 
 
