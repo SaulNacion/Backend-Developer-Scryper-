@@ -1,12 +1,6 @@
 ## Avance de videos
 ### 1. Java, Spring 6 with Spring Boot 3 and Microservices
 
-<style>
-  .task-list-item-checkbox[checked]::before {
-    color: blue; 
-  }
-</style>
-
 1. [x] Introduction of Java
 1. [x] JDK setup
 1. [x] First code in Java
