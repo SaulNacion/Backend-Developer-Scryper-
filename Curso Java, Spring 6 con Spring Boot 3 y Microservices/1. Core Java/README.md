@@ -1258,25 +1258,563 @@ In A Show
 In B Show
 ```
 
+## Final keyword | Abstract keyword
+
+El *final keyword* puede anteceder tanto a variables, métodos y clases en todos los casos los convierte en constantes.
+
+A continuación el código probando la *final keyword*
+
+```java
+final class Class 
+{
+    final int variable = 10;
+
+    public final void method(String name)
+    {
+        name = "Saul";
+        System.out.println(name);
+    }
+}
+
+public class Hello 
+{
+    public static void main(String[] args) 
+    {
+        Class obj = new Class();
+        obj.variable = 12;
+
+        System.out.println(obj.variable);
+
+        obj.method("Carlos");
+    }
+}
+```
+```cmd
+>javac Hello.java
+Hello.java:18: error: cannot assign a value to final variable variable
+        obj.variable = 12;
+           ^
+1 error
+```
+Esto quiere decir que al agregar *final* antes de la variable esta se vuelve constante. Luego si comentamos la linea que da error se obtiene:
+
+```cmd
+>javac Hello.java
+>java Hello
+10
+Saul
+```
+
+Mientras que *abstract keyword* se usa para declarar métodos en clases que se definiran en sus subclases.
+
+```java
+class Car 
+{
+    public void fly();
+
+    public void playMusic()
+    {
+        System.out.println("Playing music...");
+    }
+
+}
+class AdvCar extends Car
+{
+    public void fly()
+    {
+        System.out.println("Fliying...");
+    }
+}
+public class Hello 
+{
+    public static void main(String[] args) 
+    {
+        AdvCar obj = new AdvCar();
+
+        obj.playMusic();
+        obj.fly();
+    }
+}
+```
+```cmd
+>javac Hello.java
+>java Hello
+Playing music...
+Fliying...
+```
+
+## Object class equals toString hashcode | Upcasting and Downcasting
+
+Todas las clases son subclases de la clase *Object* esta les hereda métodos útiles para diferentes tareas específicas.
+
+```java
+class A 
+{
+
+}
+
+public class Hello 
+{
+    public static void main(String[] args)
+    {
+        A obj = new A();
+        
+        System.out.println(obj);
+        System.out.println(obj.toString());
+    }
+}
+```
+Se puede notar que aunque la clase A esté vacia el método *toString* aún compila bien.
+
+```cmd
+>javac Hello.java
+>java Hello       
+A@7a81197d
+A@7a81197d
+```
+
+Cuando se crea un objeto de la clase A con el constructor de B el programa nos marcará un erro debido a que a pesar de estar emprentadas ambas clase A no tiene referencia de B, para resolver esto se usa *upcasting* de esta forma A ya tiene una referencia de B, luego si se quiere mantener el objeto de la clase A y usar un método de B se tendrá que usar *downcasting*.
+
+```java
+class A 
+{
+    public void show1()
+    {
+        System.out.println("in A Show");
+    }
+}
+class B extends A
+{
+    public void show2()
+    {
+        System.out.println("in B Show");
+    }
+}
+
+public class Hello 
+{
+    public static void main(String[] args)
+    {
+        A obj1 = (A) new B(); // Upcasting
+        
+        obj1.show1();
+
+        B obj2 = (B) obj1; // Downcasting
+        
+        obj2.show2();
+    }
+}
+```
+
+```cmd
+>javac Hello.java
+>java Hello
+in A Show
+in B Show
+```
+
+## Inner class | Anonymous inner class | Abstract and Anonymous inner class 
+
+Una *inner class* es una clase dentro de otra, a continuación se muestra cómo usarla.
+
+```java
+class A 
+{
+    int n;
+
+    class B
+    {
+        public void show()
+        {
+            System.out.println("in B");
+        }
+    }
+    static class C
+    {
+        public void show()
+        {
+            System.out.println("in C");
+        }
+    }
+}
+public class Hello 
+{
+    public static void main(String[] args)
+    {
+        A obj = new A();
+
+        obj.n = 10;
+
+        //obj.show(); // Error
+
+        //A.B obj1 = new B(); // Error
+        A.B obj1 = obj.new B(); 
+
+        obj1.show();
+
+        A.C obj2 = new A.C();
+
+        obj2.show();
+    }    
+}
+```
+```cmd
+>javac Hello.java
+>java Hello
+in B
+in C
+```
+Una *anonymous inner class* es una forma de llamar a un método que está en la clase original, pero se le quiere aplicar polimorfismo y cambiar su funcion, para esto normalmente se usaba una subclase y se agregaba el método en esta, pero en este caso el método se crea directamente.
+
+```java
+class A 
+{
+    public void show()
+    {
+        System.out.println("in A show");
+    }
+}
+public class Hello 
+{
+    public static void main(String[] args)
+    {
+        A obj = new A()
+        {
+            public void show()
+            {
+                System.out.println("in new show");
+            }
+        };
+        obj.show();
+    }    
+}
+```
+```cmd
+>javac Hello.java
+>java Hello
+in new show
+```
+
+Para el caso de un *abstract anonymous inner class* lo que se hace es usar el concepto de *anonymous inner class* pero para definir un *abstract*.
+
+```java
+abstract class A 
+{
+    public abstract void show();
+    public abstract void config();
+}
+public class Hello 
+{
+    public static void main(String[] args)
+    {
+        A obj = new A()
+        {
+            public void show()
+            {
+                System.out.println("in abstract show");
+            }
+
+            public void config() {
+                System.out.println("in abstract config");
+            }
+            
+        };
+        obj.show();
+        obj.config();
+    }    
+}
+```
+```cmd
+>javac Hello.java
+>java Hello
+in abstract show
+in abstract config
+```
+
+## Interface
 
 
+Una *interface* es una colección de métodos abstractos y constantes que pueden ser implementados por clases concretas.
 
+Algunas especificaciones:
 
+* No es una clase
+* Una clase puede implementar varias *interfaces*
+* Todas las variables que contenga las vuelve *final* y *static*
 
+```java
+interface Computer 
+{
+    void code();
+}
+class Laptop implements Computer
+{
+    public void code()
+    {
+        System.out.println("code, compile, run");
+    }
+}
+class Desktop implements Computer
+{
+    public void code()
+    {
+        System.out.println("code, compile, run : FASTER");
+    }
+}
+class Developer
+{
+    public void appDev(Computer device)
+    {
+        device.code();
+    }
+}
+public class Hello 
+{
+    public static void main(String[] args)
+    {
+        Laptop lap = new Laptop();
+        Desktop desk = new Desktop();
+        Developer saul = new Developer();
 
+        saul.appDev(lap);
+        saul.appDev(desk);
+    }    
+}
+```
+```cmd
+>javac Helo.java
+>java Hello
+code, compile, run
+code, compile, run : FASTER
+```
 
+Otra forma usando *anonymoys inner class*
 
+```java
+interface Computer 
+{
+    void code();
+}
+class Developer
+{
+    public void appDev(Computer device)
+    {
+        device.code();
+    }
+}
+public class Hello 
+{
+    public static void main(String[] args)
+    {
+        Computer laptop = new Computer() {
+            public void code()
+            {
+                System.out.println("code, compile, run");
+            }
+        };
+        Computer desktop = new Computer() {
+            public void code()
+            {
+                System.out.println("code, compile, run : FASTER");
+            }
+        };
+        Developer saul = new Developer();
 
+        saul.appDev(laptop);
+        saul.appDev(desktop);
+    }    
+}
+```
 
+Se obtiene el mismo resultado y reduce la cantidad de clases escritas en el código.
 
+## Enum
 
+*Enum* es una palabra clave que se utiliza para definir un tipo especial de clase que representa un conjunto fijo de constantes. Es una forma de crear un conjunto de valores que se consideran como elementos específicos.
 
+```java
+enum Estado
+{
+    Activo, noActivo, enEspera, Completo
+}
 
+public class Hello 
+{
+    public static void main(String[] args)
+    {
+        Estado[] state = Estado.values();
 
+        for (Estado s : state)
+            System.out.println(s + " : " + s.ordinal());
+    }    
+}
+```
+```cmd
+>javac Hello.java
+>java Hello
+Activo : 0
+noActivo : 1
+enEspera : 2
+Completo : 3
+```
 
+A continuación se muestra el uso que se le puede dar a *enum* como clase.
 
+```java
+enum Laptop
+{
+    ASUS(2000), MAC(5000), Hp(3000), defaultLap;
 
+    private int price;
 
+    private Laptop()
+    {
+        price = 500;
+    }
+    private Laptop(int price)
+    {
+        this.price = price;
+    }
 
+    public int getPrice() {
+        return price;
+    }
 
+    public void setPrice(int price) {
+        this.price = price;
+    }
+    
+}
 
+public class Hello 
+{
+    public static void main(String[] args)
+    {
+        //Laptop lap = Laptop.MAC;
+        //System.out.println(lap + ":" + lap.getPrice());
+
+        for (Laptop lap : Laptop.values())
+            System.out.println(lap + " : " + lap.getPrice());
+    }    
+}
+```
+```cmd
+>javac Hello.java
+>java Hello
+ASUS : 2000
+MAC : 5000      
+Hp : 3000       
+defaultLap : 500
+```
+## Annotation
+
+Una *annotation* es una forma de proporcionar metadatos adicionales sobre elementos de código, como clases, métodos, variables, y otros. Las anotaciones no afectan directamente el comportamiento del código, pero permiten adjuntar información adicional que puede ser procesada en tiempo de compilación, en tiempo de ejecución o incluso por herramientas externas.
+
+Las anotaciones en Java se definen con la sintaxis @nombreAnotacion (ej. `@Override`) y pueden llevar atributos que proporcionan información adicional. Algunas anotaciones están predefinidas en Java, y también se pueden crear anotaciones personalizadas.
+
+```java
+class A
+{
+    public void showInformationInsideThisMethod()
+    {
+        System.out.println("In A");
+    }
+}
+class B extends A
+{
+    @Override
+    public void showInformationInsideThisMetod() // Error
+    {
+        System.out.println("In B");
+    }
+}
+public class Hello 
+{
+    public static void main(String[] args)
+    {
+        B obj = new B();
+        obj.showInformationInsideThisMethod();
+    }    
+}
+```
+```cmd
+>javac Hello.java
+Hello.java:10: error: method does not override or implement a method from a supertype
+    @Override
+    ^        
+1 error  
+```
+De esta forma al darle el dato al programa de que se quiere aplicar un *override* nos marca que este método no está cumpliendo.
+
+Las anotaciones en Java son ampliamente utilizadas en frameworks, bibliotecas y herramientas para proporcionar información adicional y metadatos que pueden ser procesados en tiempo de compilación o ejecución.
+
+## Lambda Expression
+
+```java
+@FunctionalInterface
+interface A
+{
+    void show();
+}
+@FunctionalInterface
+interface B
+{
+    int add(int n1, int n2);
+}
+public class Hello 
+{
+    public static void main(String[] args)
+    {
+        A obj = () -> System.out.println("in show"); // Lambda expression: "->" reemplaza "new A();{public void show(){}}"
+        obj.show();
+
+        B obj1 = (i,j) -> i+j; // With return
+        int add = obj1.add(3, 4);
+        System.out.println(add);
+    }  
+}
+
+```
+```cmd
+>javac Hello.java
+>java Hello
+in show
+7
+```
+## Exceptions
+
+Una *exception* se crea a partir de un error en el *run time* del *script*.
+
+### Exception handling using *try* and *catch*
+
+En este código se maneja la excepción para que al correr el programa este no se detenga en el error si no que lo almacene y lo obvie.
+
+```java
+public class Hello 
+{
+    public static void main(String[] args)
+    {
+        int i = 0;
+        int j = 0;
+        
+        try
+        {
+            j = 18/i;
+        }
+        catch (Exception e)
+        {
+            System.out.println("Something went wrong...");
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println(j);
+    }  
+}
+```
+```cmd
+>javac Hello.java
+>java Hello
+Something went wrong...
+/ by zero
+0
+```

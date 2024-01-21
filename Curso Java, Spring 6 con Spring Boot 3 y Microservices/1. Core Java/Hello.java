@@ -1,34 +1,23 @@
 
-class A
-{
-    public void show()
-    {
-        System.out.println("In A Show");
-    }
-}
-
-
-class B extends A
-{
-    public void show()
-    {
-        System.out.println("In B Show");
-    }
-}
-
 public class Hello 
 {
-    public static void main(String[] args) 
+    public static void main(String[] args)
     {
-        A obj;
-
-        obj = new A();
-        obj.show();
-
-        obj = new B();
-        obj.show();
+        int i = 0;
+        int j = 0;
         
-    }
+        try
+        {
+            j = 18/i;
+        }
+        catch (Exception e)
+        {
+            System.out.println("Something went wrong...");
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println(j);
+    }  
 }
 
 

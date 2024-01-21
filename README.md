@@ -62,26 +62,26 @@
 1. [x] Access Modifiers
 1. [x] Polymorphism
 1. [x] Dynamic Method Dispatch
-1. [ ] Final Keyword
-1. [ ] Object Calss equals toString
-1. [ ] Upcasting and Downcasting
-1. [ ] Abstract keyword
-1. [ ] Inner class
-1. [ ] Snonymous inner class
-1. [ ] Abstract and Anonymous inner class
-1. [ ] Need of Interface 
-1. [ ] What is Interface
-1. [ ] More On Interfaces
-1. [ ] What is Enum
-1. [ ] Enum if and switch
-1. [ ] Enum Class
-1. [ ] What is Annotation
-1. [ ] Functional Interface
-1. [ ] Lambda Expression
-1. [ ] Lambda Expression with return
-1. [ ] Types of Interface
-1. [ ] What is Exception
-1. [ ] Exception Handing using try catch
+1. [x] Final Keyword
+1. [x] Object class equals toString
+1. [x] Upcasting and Downcasting
+1. [x] Abstract keyword
+1. [x] Inner class
+1. [x] Anonymous inner class
+1. [x] Abstract and Anonymous inner class
+1. [x] Need of Interface 
+1. [x] What is Interface
+1. [x] More On Interfaces
+1. [x] What is Enum
+1. [x] Enum if and switch
+1. [x] Enum Class
+1. [x] What is Annotation
+1. [x] Functional Interface
+1. [x] Lambda Expression
+1. [x] Lambda Expression with return
+1. [x] Types of Interface
+1. [x] What is Exception
+1. [x] Exception Handling using try catch
 1. [ ] Try with multiple catch
 1. [ ] Exception Hierarchy
 1. [ ] Exception throw keyword
