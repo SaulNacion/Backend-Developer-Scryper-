@@ -1,6 +1,12 @@
 ## Avance de videos
 ### 1. Java, Spring 6 with Spring Boot 3 and Microservices
-#### Core Java
+
+<style>
+  .task-list-item-checkbox[checked]::before {
+    color: blue; 
+  }
+</style>
+
 1. [x] Introduction of Java
 1. [x] JDK setup
 1. [x] First code in Java
@@ -36,9 +42,48 @@
 1. [x] What is String
 1. [x] Mutable vs Inmutable string
 1. [x] StringBuffer and StringBuilder
-1. [ ] Static Variable
-1. [ ] Static block
-1. [ ] Static Method
-1. [ ] Encapsulation
-1. [ ] Getters and setters
-1. [ ] This keyword
+1. [x] Static Variable
+1. [x] Static block
+1. [x] Static Method
+1. [x] Encapsulation
+1. [x] Getters and setters
+1. [x] This keyword
+1. [x] Constructor
+1. [x] Default vs Parameterized
+1. [x] This and super method
+1. [x] Naming Convention
+1. [x] Anonymous Object
+1. [x] Need Of Inheritance
+1. [x] What is inheritance
+1. [x] Single and Multilevel inheritance 
+1. [x] Multiple Inheritance
+1. [x] Method Overriding
+1. [x] Packages
+1. [x] Access Modifiers
+1. [x] Polymorphism
+1. [x] Dynamic Method Dispatch
+1. [ ] Final Keyword
+1. [ ] Object Calss equals toString
+1. [ ] Upcasting and Downcasting
+1. [ ] Abstract keyword
+1. [ ] Inner class
+1. [ ] Snonymous inner class
+1. [ ] Abstract and Anonymous inner class
+1. [ ] Need of Interface 
+1. [ ] What is Interface
+1. [ ] More On Interfaces
+1. [ ] What is Enum
+1. [ ] Enum if and switch
+1. [ ] Enum Class
+1. [ ] What is Annotation
+1. [ ] Functional Interface
+1. [ ] Lambda Expression
+1. [ ] Lambda Expression with return
+1. [ ] Types of Interface
+1. [ ] What is Exception
+1. [ ] Exception Handing using try catch
+1. [ ] Try with multiple catch
+1. [ ] Exception Hierarchy
+1. [ ] Exception throw keyword
+
+

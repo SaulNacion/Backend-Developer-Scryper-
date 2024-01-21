@@ -810,10 +810,453 @@ l
 Saul Nacion
 Saul Junior Nacion
 ```
+## Static Variables | Static Methods | Static Blocks
+
+Al usar la *keyword* "static" antes de una variable esta se propaga a todos los objetos que se creen a partir de la clase que la contiene
+
+```java
+class Mobile
+{
+    int price;
+    String brand;
+    static String name;
+
+    public void show()
+    {
+        System.out.println(price + " " + brand + " " + name);
+    }
+}
+
+public class Hello 
+{
+    public static void main(String args[]) 
+    {
+        Mobile mb1 = new Mobile();
+
+        mb1.price = 100;
+        mb1.brand = "Apple";
+        mb1.name = "Smart Phone";
+
+        Mobile mb2 = new Mobile();
+
+        mb2.price = 134;
+        mb2.brand = "Samsung";
+        //mb2.name = "Smart Phone";
+
+        mb1.name = "JustPhone";
+
+        mb1.show();
+        mb2.show();
+
+    }
+}
+```
+Si se usa antes de un *method* este quedará ligado a la clase y para usarse no será necesario crear un nuevo objeto, al no tener un identificador (Un objeto relacionado) no se pueden añadir variables a este método a menos que hagamos que dependa de un objeto de esta forma se podrían añadir varibles al *static method*.
 
 
+```java
+class Mobile
+{
+    int price;
+    String brand;
+    String name;
+
+    public static void show1()
+    {
+        System.out.println("static method");
+    }
+
+    public static void show2(Mobile obj)
+    {
+        System.out.println(obj.price + ":" + obj.brand + ":" + obj.name);
+    }
+}
 
 
+public class Hello 
+{
+    public static void main(String[] args) 
+    {
+        Mobile.show1();
+
+        Mobile obj1 = new Mobile();
+
+        obj1.price = 200;
+        obj1.brand = "Google";
+        obj1.name = "SmartPhone";  
+
+        Mobile.show2(obj1);
+
+    }
+}
+```
+
+Cada vez que un objeto es usado se ejecuta un constructor en el que podríamos poner variables iniciales, pero esto no es óptimo, porque el sistema tendría que llamar a las varibles varias veces para esto existe un bloque estático que se ejecuta una sola vez cuando usamos objetos en el método principal sin importar la cantidad de objetos que se creen.
+
+```java
+class Mobile
+{
+    int price;
+    String brand;
+    static String name;
+
+    static
+    {
+        name = "Phone";
+        System.out.println("in static block");
+    }
+
+    public void show()
+    {
+        System.out.println("in method");
+        System.out.println(price + ":" + brand + ":" + name);
+    }
+}
+
+
+public class Hello 
+{
+    public static void main(String[] args) 
+    {
+        Mobile obj1 = new Mobile();
+
+        obj1.price = 200;
+        obj1.brand = "Google";
+
+        Mobile obj2 = new Mobile();
+
+        obj2.price = 145;
+        obj2.brand = "Apple";
+        
+        obj1.show();
+        obj2.show();
+         
+    }
+}
+```
+
+Se puede notar que el bloque *static* solo se ejecuta una vez a pesar de que hay dos objetos
+
+```cmd
+>javac Hello.java
+>java Hello
+in static block
+in method      
+145:Apple:Phone
+in method       
+145:Apple:Phone 
+```
+## Encapsulation | *this* keyword | Constructor
+
+Cuando se quiere mencionar variables que tienen la denimonación de *private* lo que se hace es usar un método dentro de la clase que contiene a las varibles.
+
+```java
+class Human
+{
+    private int age; 
+    private String name;
+
+    public int getAge()
+    {
+        return 21;
+    }
+    
+    public String getName()
+    {
+        return "Saul";
+    }
+
+}
+
+
+public class Hello 
+{
+    public static void main(String[] args) 
+    {
+        Human obj = new Human();
+
+        System.out.println("Su edad es: " + obj.getAge());
+        System.out.println("Su nombre es: " + obj.getName());
+    }
+}
+```
+
+```cmd
+>javac Hello.java
+>java Hello 
+Su edad es: 21
+Su nombre es: Saul
+
+```
+
+Ahora si se quiere cambiar los valores de dichas variables se hace la misma manera aqui surge un problema y es que no se puede denominar a la varible local *age* de la misma manera que la instancia variable `public void setAge(int age){age = age}` por lo que se usa *this* para aclararle al programa que queremos asignarle una variable diferente a la instancia `public void setAge(int age){this.age = age}`.
+
+```java
+class Human
+{
+    private int age; 
+    private String name;
+
+    public int getAge() {
+        return age;
+    }
+    public void setAge(int age) {
+        this.age = age;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+   
+}
+
+
+public class Hello 
+{
+    public static void main(String[] args) 
+    {
+        Human obj = new Human();
+
+        obj.setAge(35);
+        obj.setName("Carlos");
+        
+        System.out.println("Su edad es: " + obj.getAge());
+        System.out.println("Su nombre es: " + obj.getName());
+
+    }
+}
+```
+```cmd
+>javac Hello.java
+>java Hello
+Su edad es: 35
+Su nombre es: Carlos
+```
+Un constructor es un método especial dentro de una clase que se utiliza para inicializar objetos de esa clase. Su nombre debe coincidir exactamente con el nombre de la clase y no tiene un tipo de retorno explícito. Los constructores son invocados automáticamente cuando se crea un nuevo objeto de la clase.
+
+En el ejemplo anterior en la parte `Human obj = new Human();` *Human()* es el constructor. Se usan usualmente para inicializar la valores o código cuando se llama un objeto. 
+
+## Default vs Parameterized | *this* and *super* method
+
+Siguiendo con el ejemplo anterior se puede ver que existen métodos que no requieren ingresar variables para hacer acciones estos se les denomina en *default* (ej. `public void getName(){}`), pero si se necesitan ingresar varibles este será un método *parameterized* (ej. `public void setName(){String name}`).
+
+Cuando se tiene clases padres e hijos, normalmente al usarse un objeto de la clase hijo el constructor de la clase padre se ejecutará primero que el de la clase hijo esto pasa porque aunque no se escriba se esta usando el método *super()* en el constructor hijo que refiere al constructor de la clase padre, si se quiere revertir eso lo que se tiene que hacer es usar el método *this()*.
+
+## Anonymous Object
+
+Es un objeto que no tiene denominación, se usa para usar algún método de la clase directamente.
+
+```java
+class Some
+{
+   public void showSome()
+   {
+        System.out.println("Some");
+   }
+}
+
+
+public class Hello 
+{
+    public static void main(String[] args) 
+    {
+        new Some().showSome();;
+
+    }
+}
+```
+```cmd
+>javac Hello.java
+>java Hello
+Some
+```
+
+## What is inheritance | Single and Multilevel inheritance
+
+*Inheritance* o herencia se usa para crear clases que contengan información de otras clases, emparentandolas como padre a la clase original e hijo a la clase que posee sus métodos.
+
+```java
+class Calc
+{
+   
+    public int add(int n1, int n2)
+   {
+        return n1 + n2;
+   }
+   public int sub(int n1, int n2)
+   {
+        return n1 - n2;
+   }
+}
+
+
+class AdvCalc extends Calc
+{
+    public int mul(int n1, int n2)
+    {
+         return n1 * n2;
+    }
+    public double div(double n1, double n2)
+    {
+        return n1 / n2;
+    }
+}
+
+public class Hello 
+{
+    public static void main(String[] args) 
+    {
+        int n1 = 1;
+        int n2 = 3;
+        AdvCalc obj = new AdvCalc();
+
+        System.out.println( "Add: " + obj.add(n1, n2));
+        System.out.println( "Sub: " + obj.sub(n1, n2));
+        System.out.println( "Mul: " + obj.mul(n1, n2));
+        System.out.println( "Div: " + obj.div(n1, n2));
+    }
+}
+```
+```cmd
+>javac Hello.java
+>java Hello
+Add: 4
+Sub: -2
+Mul: 3
+Div: 0.3333333333333333
+```
+Esta es una *single inheritance*, en cambio si se escribiera algo como
+```java
+
+Class A
+{
+    A()
+    {
+        // Code
+    }
+}
+Class B extends A
+{
+    B()
+    {
+        // Code
+    }
+}
+Class C extends B
+{
+    C()
+    {
+        // Code
+    }
+}
+```
+Se tendría una *multilevel inheritance*.
+
+## Method Overriding | Access Modifiers
+
+Cuando existan dos clases emparentadas con el mismo método el que se ejecutará será el de la clase donde se creo el objeto a pesar de que esta clase este como hija de la otra.
+
+```java
+class A
+{
+    public void show()
+    {
+        System.out.println("In A Show");
+    }
+    public void config()
+    {
+        System.out.println("In A Config");
+    }
+}
+
+
+class B extends A
+{
+    public void show()
+    {
+        System.out.println("In B Show");
+    }
+}
+
+public class Hello 
+{
+    public static void main(String[] args) 
+    {
+        B obj = new B();
+
+        obj.show();
+        obj.config();
+    }
+}
+```
+```cmd
+>javac Hello.java
+>java Hello
+In B Show
+In A Config
+```
+A las *keywords* *public*, *protected*, *private*, *default* (esta última no se escribe) se les denomina *Access modifiers* estas restring el uso de la clase, método, objeto o varible a las que antecedan, aqui una tabla con sus respectivas restricciones:
+
+||private|public|protected|default|
+|-|------|------|---------|-------|
+|Same class| Yes| Yes| Yes| Yes
+|Same package subclass| No| Yes| Yes| Yes
+|Same package non-subclass| No| Yes| Yes| Yes
+|Different package subclass| No| Yes| Yes| No
+|Different package non-subclass| No| No| Yes| No
+
+## Polymorphism | Dynamic Method Dispatch
+
+El *polymorphism* se refiere a cuando un método se comporta de diferente manera dependiendo de la situación en la que se encuentre, existen dos tipos de polimorfismo, en la siguiente imagen se explican y se da un ejemplo de cómo se presentan.
+
+![Grafico_2](/images/Grafico_2.PNG)
+
+*Dynamic Method Dispatch* se refiere al proceso mediante el cual el método que se ejecutará para una llamada a un método es decidido en tiempo de ejecución en lugar de tiempo de compilación.
+
+Cuando se tiene una jerarquía de clases y una subclase hereda de una superclase, y ambas clases tienen métodos con el mismo nombre, entonces puedes usar *Dynamic Method Dispatch* para invocar el método de la subclase a través de una referencia de la superclase.
+
+```java
+class A
+{
+    public void show()
+    {
+        System.out.println("In A Show");
+    }
+}
+
+
+class B extends A
+{
+    public void show()
+    {
+        System.out.println("In B Show");
+    }
+}
+
+public class Hello 
+{
+    public static void main(String[] args) 
+    {
+        A obj;
+
+        obj = new A();
+        obj.show();
+
+        obj = new B();
+        obj.show();
+        
+    }
+}
+```
+
+```cmd
+>javac Hello.java
+>java Hello
+In A Show
+In B Show
+```
 
 
 
