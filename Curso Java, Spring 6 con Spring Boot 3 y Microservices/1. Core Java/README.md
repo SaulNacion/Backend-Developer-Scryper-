@@ -1781,7 +1781,7 @@ public class Hello
 in show
 7
 ```
-## Try and Catch:
+## Try and Catch
 
 En Java, `try` y `catch` son bloques utilizados para manejar excepciones. Un bloque `try` contiene el código que puede lanzar una excepción, y el bloque `catch` contiene el código que se ejecutará en caso de que se produzca esa excepción. Esto ayuda a manejar errores de manera controlada en lugar de dejar que el programa termine abruptamente.
 
@@ -1799,7 +1799,7 @@ try {
 
 En el bloque `try`, se puede tener código que potencialmente lance varias excepciones de diferentes tipos. Cada bloque `catch` se encarga de manejar un tipo específico de excepción. El bloque `finally` es opcional y se ejecuta siempre, independientemente de si se lanza una excepción o no. Puede contener código que debe ejecutarse, como la liberación de recursos, independientemente de las excepciones.
 
-### Try with Multiple Catch:
+### Try with Multiple Catch
 
 Cuando se utiliza un solo bloque `try` con múltiples bloques `catch`, el código en el bloque `try` se evalúa, y si se lanza una excepción, se compara con cada bloque `catch` en orden. El primer bloque `catch` cuyo tipo coincida con la excepción lanzada manejará la excepción. 
 
@@ -1819,7 +1819,7 @@ try {
 
 La jerarquía de los bloques `catch` debe ser de más específica a más general. Si se tiene un bloque `catch` para `Exception` al final, se ejecutará solo si ninguna de las excepciones específicas ha sido manejada.
 
-### Try with Resources:
+### Try with Resources
 
 Java 7 introdujo la declaración `try-with-resources`, que simplifica la gestión de recursos que deben cerrarse después de su uso, como flujos de entrada/salida (`InputStream`, `OutputStream`), conexiones de bases de datos, etc.
 

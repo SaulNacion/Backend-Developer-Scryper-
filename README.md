@@ -1,6 +1,8 @@
 ## Avance de videos
 ### 1. Java, Spring 6 with Spring Boot 3 and Microservices
 
+### Core Java
+
 1. [x] Introduction of Java
 1. [x] JDK setup
 1. [x] First code in Java
@@ -100,3 +102,64 @@
 1. [x] Map Filter Reduce Sorted1
 1. [x] Map Filter Reduce Sorted2
 
+### Getting Started
+
+99. [x] Introducing to Spring
+1. [x] Spring Documentation
+1. [x] Prerequisites
+1. [x] Software Requierement
+1. [x] Sprint Tool Suite
+1. [x] Dependency Injection
+
+### Spring Boot
+
+105. [x] Getting Spring Starter Project 
+1. [x] Dependency Injection in Spring
+1. [x] Spring Boot Autowire
+
+### Spring Core IoC
+
+108. [x] BeanFactory
+1. [x] ApplicationContext
+1. [x] Spring Container
+1. [x] Singleton vs Prototype
+1. [x] Setter Injection
+1. [x] Ref Attribute
+1. [x] Constructor Injection
+1. [x] Autowire
+1. [x] Primary Bean
+
+### Spring MVC
+
+117. [x] Spring MVC Therory
+1. [x] Spring MVC Getting Started
+1. [x] Creating Controller
+1. [x] Tomcat Jasper
+1. [x] Accepting User Input
+1. [x] RequestParam
+1. [x] ModelAndView
+1. [x] Prefix and Sufix
+1. [x] Model and ModelMap
+1. [x] Need of ModelAttribute
+1. [x] ModelAttribute
+1. [x] ModelAttribute at Method Level
+1. [x] Spring MVC Project
+1. [x] Spring MVC Part 2
+1. [x] Post Mapping
+1. [x] Get Mapping
+
+### Spring ORM
+
+133. [ ] Spirng ORM Theory
+1. [ ] Spring Hibernate Config
+1. [ ] MySQL and DAO
+1. [ ] DAO Creation
+1. [ ] Add and Fetch
+
+### Spring Data JPA
+
+138. [ ] Spring Data JPA Configuration
+1. [ ] JPARepository
+1. [ ] JPARepository Add and Fetch
+1. [ ] Query DSL
+1. [ ] Query Annotation
