@@ -76,8 +76,27 @@
 1. [x] Types of Interface
 1. [x] What is Exception
 1. [x] Exception Handling using try catch
-1. [ ] Try with multiple catch
-1. [ ] Exception Hierarchy
-1. [ ] Exception throw keyword
-
+1. [x] Try with multiple catch
+1. [x] Exception Hierarchy
+1. [x] Exception throw keyword
+1. [x] Custom Exception
+1. [x] Ducking Exception using throw
+1. [x] User input using BufferedReader and Scanner
+1. [x] Try with resources
+1. [x] Threads
+1. [x] Multiple Threads
+1. [x] Thread Priority and Sleep
+1. [x] Runnable vs Thread
+1. [x] Race Condition
+1. [x] Thread states
+1. [x] Collections
+1. [x] ArrayList
+1. [x] Set
+1. [x] Map
+1. [x] Comparator vs Comparable
+1. [x] Need of Stream API
+1. [x] forEach Method
+1. [x] Stream API
+1. [x] Map Filter Reduce Sorted1
+1. [x] Map Filter Reduce Sorted2
 

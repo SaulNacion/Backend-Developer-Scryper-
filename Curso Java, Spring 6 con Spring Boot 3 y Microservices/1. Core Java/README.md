@@ -1781,7 +1781,63 @@ public class Hello
 in show
 7
 ```
-## Exceptions
+## Try and Catch:
+
+En Java, `try` y `catch` son bloques utilizados para manejar excepciones. Un bloque `try` contiene el código que puede lanzar una excepción, y el bloque `catch` contiene el código que se ejecutará en caso de que se produzca esa excepción. Esto ayuda a manejar errores de manera controlada en lugar de dejar que el programa termine abruptamente.
+
+```java
+try {
+    // Código que puede lanzar una excepción
+} catch (TypeException1 e1) {
+    // Manejar la excepción de TypeException1
+} catch (TypeException2 e2) {
+    // Manejar la excepción de TypeException2
+} finally {
+    // Código que se ejecutará siempre, independientemente de si se produce una excepción o no
+}
+```
+
+En el bloque `try`, se puede tener código que potencialmente lance varias excepciones de diferentes tipos. Cada bloque `catch` se encarga de manejar un tipo específico de excepción. El bloque `finally` es opcional y se ejecuta siempre, independientemente de si se lanza una excepción o no. Puede contener código que debe ejecutarse, como la liberación de recursos, independientemente de las excepciones.
+
+### Try with Multiple Catch:
+
+Cuando se utiliza un solo bloque `try` con múltiples bloques `catch`, el código en el bloque `try` se evalúa, y si se lanza una excepción, se compara con cada bloque `catch` en orden. El primer bloque `catch` cuyo tipo coincida con la excepción lanzada manejará la excepción. 
+
+```java
+try {
+    // Código que puede lanzar una excepción
+} catch (TypeException1 e1) {
+    // Manejar la excepción de TypeException1
+} catch (TypeException2 e2) {
+    // Manejar la excepción de TypeException2
+} catch (Exception e) {
+    // Manejar cualquier otra excepción no manejada anteriormente
+} finally {
+    // Código que se ejecutará siempre
+}
+```
+
+La jerarquía de los bloques `catch` debe ser de más específica a más general. Si se tiene un bloque `catch` para `Exception` al final, se ejecutará solo si ninguna de las excepciones específicas ha sido manejada.
+
+### Try with Resources:
+
+Java 7 introdujo la declaración `try-with-resources`, que simplifica la gestión de recursos que deben cerrarse después de su uso, como flujos de entrada/salida (`InputStream`, `OutputStream`), conexiones de bases de datos, etc.
+
+```java
+try (Resource1 rc1 = new Resource1(); Resource2 rc2 = new Recurso2()) {
+    // Código que utiliza los recursos
+} catch (TypeException1 e1) {
+    // Manejar la excepción de TypeException1
+} catch (TypeException2 e2) {
+    // Manejar la excepción de TypeException2
+} finally {
+    // Código que se ejecutará siempre, incluso si se lanza una excepción
+}
+```
+
+En el ejemplo anterior, `Resource1` y `Resource2` son recursos que implementan la interfaz `AutoCloseable` o `Closeable`. La declaración `try-with-resources` garantiza que estos recursos se cierren automáticamente al finalizar el bloque `try`, sin necesidad de un bloque `finally` explícito. Esto mejora la legibilidad del código y reduce la posibilidad de olvidar cerrar los recursos.
+
+## Exception
 
 Una *exception* se crea a partir de un error en el *run time* del *script*.
 
@@ -1818,3 +1874,475 @@ Something went wrong...
 / by zero
 0
 ```
+### Exception hierarchy
+
+![Grafico_3](/images/Grafico_3.PNG)
+
+### Exception throw keyword
+
+La *keyword throw* se utiliza para lanzar explícitamente una excepción. La excepción se lanza cuando ocurre una condición excepcional durante la ejecución del programa. Cuando lanzas una excepción con throw, estás indicando que algo inesperado o incorrecto ha sucedido y que el flujo normal del programa debe interrumpirse.
+
+```java
+public class Hello 
+{
+    public static void main(String[] args)
+    {
+        int i = 10;
+        int j = 0;
+
+        try {
+            if (j == 0) {
+                // Lanzar una excepción si el denominador es cero
+                throw new ArithmeticException("Division por cero no permitida");
+            }
+
+            int resultado = i / j;
+            System.out.println("Resultado: " + resultado);
+        } catch (ArithmeticException e) {
+            // Capturar y manejar la excepción
+            System.out.println("Error: " + e.getMessage());
+        }
+    }  
+}
+```
+```cmd
+>javac Hello.java
+>java Hello 
+Error: Division por cero no permitida
+```
+### Custom Exception
+
+Una "Custom Exception" se refiere a una excepción que uno mismo crea al extender la clase base `Exception` o alguna de sus subclases, como `RuntimeException`. Crear excepciones personalizadas permite manejar situaciones específicas o errores que no están cubiertos adecuadamente por las excepciones estándar proporcionadas por Java.
+
+Pasos para crear una excepción personalizada:
+
+1. **Crear una nueva clase que extienda `Exception` o alguna de sus subclases:**
+
+   ```java
+   public class MyException extends Exception {
+   }
+   ```
+
+   Tambiém se puede extender de `RuntimeException` para crear una excepción no verificada:
+
+   ```java
+   public class MyException extends RuntimeException {
+   }
+   ```
+
+2. **Usar tu excepción personalizada en el código:**
+
+   ```java
+   public class Hello
+   {
+       public static void main(String[] args) {
+           try {
+               // Lanzar tu excepción personalizada
+               throw new MyException("Este es un mensaje de error personalizado");
+           } catch (MyException e) {
+               // Capturar y manejo de excepción personalizada
+               System.out.println("Error: " + e.getMessage());
+           }
+       }
+   }
+   ```
+
+Crear excepciones personalizadas permite:
+
+- Proporcionar información específica del contexto para el error mediante la definición de constructores personalizados que aceptan mensajes descriptivos.
+- Manejar de manera más efectiva situaciones excepcionales específicas en tu aplicación.
+- Hacer que el código sea más legible y mantenible, ya que las excepciones personalizadas pueden expresar con mayor claridad la intención del error.
+
+## User input using BufferedReader and Scanner
+
+`BufferedReader` y `Scanner` son dos clases que se utilizan comúnmente para obtener entrada de usuario desde la consola. Ambas clases proporcionan métodos para leer datos del teclado, pero hay algunas diferencias en su uso y rendimiento. A continuación algunos ejemplos de cómo se usan ambas clases para obtener la entrada del usuario:
+
+### Using BufferedReader:
+
+```java
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Hello {
+    public static void main(String[] args) {
+        // Crear un BufferedReader para leer la entrada del usuario
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        try {
+            System.out.print("Ingrese su nombre: ");
+            String nombre = reader.readLine();
+            System.out.println("Hola, " + nombre + "!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                // Cerrar el BufferedReader al finalizar
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+```
+
+### Using Scanner:
+
+```java
+import java.util.Scanner;
+
+public class Hello {
+    public static void main(String[] args) {
+        // Crear un objeto Scanner para leer la entrada del usuario
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Ingrese su nombre: ");
+        String nombre = scanner.nextLine();
+        System.out.println("Hola, " + nombre + "!");
+
+        // Cerrar el Scanner al finalizar (opcional en este caso)
+        scanner.close();
+    }
+}
+```
+
+**Diferencias:**
+
+- `BufferedReader` es más eficiente en la lectura de grandes volúmenes de datos debido a su búfer interno.
+- `Scanner` es más fácil de usar y proporciona métodos convenientes para leer diferentes tipos de datos (enteros, dobles, etc.).
+- `BufferedReader` lanza excepciones de IO (`IOException`), mientras que `Scanner` tiene métodos que pueden lanzar excepciones, pero también proporciona métodos sin excepciones para manejar la entrada del usuario.
+
+## Threads
+
+### Multiple Threads
+
+Los *threads* permiten la ejecución simultánea de tareas múltiples dentro de un programa. Un programa que utiliza múltiples *threads* puede realizar varias operaciones de forma concurrente, lo que puede mejorar la eficiencia y la capacidad de respuesta del software.
+
+```java
+class A extends Thread {
+    public void run() {
+        // Code
+    }
+}
+
+public class Hello {
+    public static void main(String[] args) {
+        A obj1 = new A();
+        A obj2 = new A();
+
+        obj1.start();
+        obj2.start();
+    }
+}
+```
+
+### Thread Priority and Sleep
+
+Los *threads* tienen una prioridad asociada que puede ser ajustada para influir en la planificación de la ejecución. La prioridad por defecto es `Thread.NORM_PRIORITY`. Además, se puede utilizar el método `sleep()` para pausar la ejecución de un *thread* por un período de tiempo específico.
+
+```java
+class A extends Thread {
+    public void run() {
+        for (int i = 1; i <= 5; i++) {
+            System.out.println(Thread.currentThread().getName() + " : " + i);
+            try {
+                // Pausar el hilo por 500 milisegundos
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+public class Hello {
+    public static void main(String[] args) {
+        A obj1 = new A();
+       A obj2 = new A();
+
+        // Establecer prioridades
+        obj1.setPriority(Thread.MAX_PRIORITY);
+        obj2.setPriority(Thread.MIN_PRIORITY);
+
+        // Iniciar los hilos
+        obj1.start();
+        obj2.start();
+    }
+}
+```
+
+### Runnable vs Thread
+
+Se pueden crear *threads* implementando la interfaz `Runnable` o extendiendo la clase `Thread`. La implementación de `Runnable` es preferida porque permite que la clase herede de otra clase, lo que no sería posible si extends `Thread`.
+
+```java
+// Implementando Runnable
+class A implements Runnable {
+    public void run() {
+        // Code
+    }
+}
+
+// Utilizando la interfaz Runnable
+Thread obj1 = new Thread(new A());
+
+// Extendiendo Thread
+class B extends Thread {
+    public void run() {
+        // Código del hilo
+    }
+}
+
+// Utilizando la clase Thread
+B obj2 = new B();
+```
+
+### Race Condition
+
+Una *race condition* ocurre cuando dos o más *threads* acceden y modifican compartidamente datos al mismo tiempo, lo que puede llevar a resultados inesperados debido a la falta de sincronización. La sincronización puede lograrse utilizando la *keyword* `synchronized` o mediante el uso de objetos `Lock`.
+
+```java
+class Contador {
+    private int valor = 0;
+
+    public synchronized void incrementar() {
+        valor++;
+    }
+
+    public int obtenerValor() {
+        return valor;
+    }
+}
+
+public class Hello {
+    public static void main(String[] args) {
+        Contador contador = new Contador();
+
+        Runnable tarea = () -> {
+            for (int i = 0; i < 1000; i++) {
+                contador.incrementar();
+            }
+        };
+
+        // Se crea dos hilos que comparten el mismo contador
+        Thread obj1 = new Thread(tarea);
+        Thread obj2 = new Thread(tarea);
+
+        obj1.start();
+        obj2.start();
+
+        try {
+            obj1.join();
+            obj2.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Valor final del contador: " + contador.obtenerValor());
+    }
+}
+```
+
+### Thread States
+
+Los *threads* pueden estar en diferentes estados durante su ciclo. Los principales estados son:
+- **Nuevo (New):** Cuando se crea una instancia del hilo, pero antes de iniciar su ejecución (`new Thread()`).
+- **Ejecutable (Runnable):** Después de invocar `start()` está listo para ser ejecutado, pero puede estar esperando su turno.
+- **En ejecución (Running):** Se está ejecutándo activamente.
+- **En espera (Blocked/Waiting):** Está esperando que se cumpla alguna condición antes de continuar.
+
+## Collections
+
+### ArrayList
+
+`ArrayList` es una implementación de la interfaz `List`, y forma parte del framework de *Collections* en el paquete `java.util`. Representa una lista dinámica que puede cambiar su tamaño durante la ejecución del programa. Algunas características clave de `ArrayList` incluyen:
+
+```java
+import java.util.ArrayList;
+
+public class Hello {
+    public static void main(String[] args) {
+        ArrayList<String> namesList = new ArrayList<>();
+
+        namesList.add("Saul");
+        namesList.add("Pedro");
+        namesList.add("Carlos");
+
+        String primerNombre = listaDeNombres.get(0);
+        System.out.println("Primer nombre: " + primerNombre);
+
+        for (String nombre : listaDeNombres) {
+            System.out.println(nombre);
+        }
+    }
+}
+```
+```cmd
+>javac Hello.java
+>java Hello
+Primer nombre: Saul
+Saul  
+Pedro 
+Carlos
+```
+
+### Set
+
+`Set` es una interfaz que representa una colección sin duplicados. Las implementaciones comunes de `Set` incluyen `HashSet`, `LinkedHashSet`, y `TreeSet`. No garantizan un orden específico de los elementos y se utilizan cuando se requiere asegurar que no hay duplicados en una colección.
+
+```java
+import java.util.HashSet;
+import java.util.Set;
+
+public class Hello {
+    public static void main(String[] args) {
+
+        Set<Integer> conjuntoDeNumeros = new HashSet<>();
+
+        conjuntoDeNumeros.add(10);
+        conjuntoDeNumeros.add(20);
+        conjuntoDeNumeros.add(30);
+        conjuntoDeNumeros.add(10);  // No se permite duplicados
+
+        for (int numero : conjuntoDeNumeros) {
+            System.out.println(numero);
+        }
+    }
+}
+```
+```cmd
+>javac Hello.java
+>java Hello
+20
+10
+30
+```
+
+### Map
+
+`Map` es una interfaz en Java que representa una colección de pares clave-valor, donde cada clave está asociada a un valor. Algunas implementaciones comunes de `Map` son `HashMap`, `LinkedHashMap`, y `TreeMap`.
+
+```java
+import java.util.HashMap;
+import java.util.Map;
+
+public class Hello {
+    public static void main(String[] args) {
+        Map<String, Integer> mapaDeEdades = new HashMap<>();
+
+        mapaDeEdades.put("Alice", 25);
+        mapaDeEdades.put("Bob", 30);
+        mapaDeEdades.put("Charlie", 22);
+
+        int edadDeBob = mapaDeEdades.get("Bob");
+        System.out.println("Edad de Bob: " + edadDeBob);
+
+        for (String nombre : mapaDeEdades.keySet()) {
+            System.out.println(nombre + ": " + mapaDeEdades.get(nombre));
+        }
+    }
+}
+```
+```cmd
+>javac Hello.java
+>java Hello
+Edad de Bob: 30
+Bob: 30    
+Alice: 25  
+Charlie: 22
+```
+
+### Comparator vs Comparable
+
+Se tiene que tanto `Comparator` como `Comparable` son interfaces que se utilizan para definir un orden para los elementos de una colección, como `List` o `TreeSet`.
+
+- **Comparable:**
+  - La interfaz `Comparable` se utiliza para definir un orden natural para los objetos de una clase.
+  - La clase cuyos objetos se están comparando debe implementar la interfaz `Comparable` y sobrescribir el método `compareTo(Object obj)`.
+  - Ejemplo:
+    ```java
+    public class Persona implements Comparable<Persona> {
+        private String nombre;
+        private int edad;
+
+
+        @Override
+        public int compareTo(Persona otraPersona) {
+            return Integer.compare(this.edad, otraPersona.edad);
+        }
+    }
+    ```
+
+- **Comparator:**
+  - La interfaz `Comparator` se utiliza para definir un orden alternativo o personalizado para objetos que no implementan `Comparable`, o para modificar el orden natural de objetos que sí lo implementan.
+  - Se puede utilizar para ordenar una lista según diferentes criterios.
+  - Ejemplo:
+    ```java
+    import java.util.Comparator;
+
+    public class ComparadorPorNombre implements Comparator<Persona> {
+        @Override
+        public int compare(Persona persona1, Persona persona2) {
+            return persona1.getNombre().compareTo(persona2.getNombre());
+        }
+    }
+    ```
+
+Ambas interfaces permiten especificar el criterio de ordenamiento según sus necesidades. *Comparable* define el orden natural de un objeto, mientras que *Comparator* permite la flexibilidad de definir múltiples criterios de ordenación o el orden de objetos que no pueden ser modificados para implementar *Comparable*.
+
+## Stream API | forEach Method | Map Filter Reduce Sorted
+
+La *Stream API* proporciona una forma eficiente de procesar colecciones de datos de manera funcional. Aquí, se describen brevemente los métodos *forEach*, *map*, *filter*, *reduce* y *sorted*:
+
+### *forEach* Method
+
+El método *forEach* se utiliza para iterar sobre los elementos de la secuencia (stream) y aplicar una operación a cada elemento. Es una forma de realizar operaciones en paralelo en los elementos de la secuencia.
+
+```java
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+numbers.stream().forEach(num -> System.out.print(num + " "));
+```
+
+### *map* Method
+
+El método *map* transforma cada elemento de la secuencia mediante la aplicación de una función proporcionada como argumento. Devuelve una nueva secuencia que contiene los resultados de aplicar la función a cada elemento.
+
+```java
+List<String> words = Arrays.asList("hello", "hi", "bye");
+
+List<Integer> wordLengths = words.stream().map(String::length).collect(Collectors.toList());
+```
+
+### *filter* Method
+
+El método *filter* se utiliza para seleccionar elementos de la secuencia que cumplen con un cierto criterio. Devuelve una nueva secuencia que contiene solo los elementos que satisfacen la condición especificada.
+
+```java
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+List<Integer> evenNumbers = numbers.stream().filter(num -> num % 2 == 0).collect(Collectors.toList());
+```
+
+### *reduce* Method
+
+El método *reduce* se utiliza para combinar los elementos de la secuencia en un solo resultado aplicando una operación asociativa y acumulativa.
+
+```java
+List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+
+int sum = numbers.stream().reduce(0, (acc, num) -> acc + num);
+```
+
+### *sorted* Method
+
+El método *sorted* se utiliza para ordenar los elementos de la secuencia. Puede recibir un comparador personalizado o utilizar el orden natural de los elementos si son comparables.
+
+```java
+List<String> fruits = Arrays.asList("banana", "apple", "orange");
+
+List<String> sortedFruits = fruits.stream().sorted().collect(Collectors.toList());
+```
+
+Estos métodos proporcionan funcionalidades al trabajar con *streams* en Java, permitiendo un código más conciso y legible.

@@ -1,24 +1,14 @@
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class Hello 
-{
+public class Hello {
     public static void main(String[] args)
     {
-        int i = 0;
-        int j = 0;
-        
-        try
-        {
-            j = 18/i;
-        }
-        catch (Exception e)
-        {
-            System.out.println("Something went wrong...");
-            System.out.println(e.getMessage());
-        }
+        List<String> fruits = Arrays.asList("banana", "apple", "orange");
+        List<String> sortedFruits = fruits.stream().sorted().collect(Collectors.toList());
 
-        System.out.println(j);
-    }  
+        System.out.println(sortedFruits);
+    }
 }
-
-
 
