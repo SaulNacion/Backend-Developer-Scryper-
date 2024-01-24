@@ -150,11 +150,11 @@
 
 ### Spring ORM
 
-133. [ ] Spirng ORM Theory
-1. [ ] Spring Hibernate Config
-1. [ ] MySQL and DAO
-1. [ ] DAO Creation
-1. [ ] Add and Fetch
+133. [x] Spirng ORM Theory
+1. [x] Spring Hibernate Config
+1. [x] MySQL and DAO
+1. [x] DAO Creation
+1. [x] Add and Fetch
 
 ### Spring Data JPA
 
@@ -163,3 +163,34 @@
 1. [ ] JPARepository Add and Fetch
 1. [ ] Query DSL
 1. [ ] Query Annotation
+
+### Spring REST
+
+143. [ ] What is REST
+1. [ ] Postman Setup
+1. [ ] REST Getmapping
+1. [ ] Jackson
+1. [ ] PathVariable
+1. [ ] RestController
+1. [ ] PostMapping
+1. [ ] Jackson XML
+1. [ ] Produces Attribute
+1. [ ] RequestBody and Consumes Attribute
+
+### Spring AOP
+
+153. [ ] Why AOP
+1. [ ] AOP Terms
+1. [ ] Aspect and Before Annotation
+1. [ ] Logger
+1. [ ] After Finally
+1. [ ] After Runnig and Throwing
+
+### Spring Security
+
+159. [ ] What is Spring Security
+1. [ ] Spring Security part 2
+1. [ ] Spring Security part 3
+1. [ ] Spring Security MySQL
+1. [ ] Spring Security BCrypt
+1. [ ] Spring Boot Security OAuth2
